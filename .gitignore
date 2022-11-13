@@ -1,0 +1,3 @@
+converted/*
+doc_files/*
+!doc_files/__init__.py
