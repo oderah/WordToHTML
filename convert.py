@@ -60,7 +60,7 @@ def hc_sc_clean(result, lang='en'):
     result = re.sub('<td(.*?)><p>(.*?)</p></td>', r'<td\1>\2</td>', result)
     result = re.sub('href="file:.*?"', 'href="#"', result)
     result = re.sub('src="file:.*?"', 'src="#"', result)
-    result = re.sub('<img.*?/>', '<img src="#" class="img-responsive" alt="" />')
+    result = re.sub('<img.*?/>', '<img src="#" class="img-responsive" alt="" />', result)
     result = re.sub(
         '<sup>{0,1}<a href="#endnote-(\d+)" id="endnote-ref-\d+">.*?</a></sup>{0,1}',
         r'<sup><a class="fn-lnk" href="#fn\1"><span class="wb-inv">Footnote </span>\1</a></sup>' \
@@ -94,7 +94,7 @@ def export(result, path, should_chunk=0):
     print('Exporting...')
     for index, chunk in enumerate(chunks):
         chunk_path = path + f'-part{ index + 1 }.html'
-        with open(chunk_path, 'w') as html_file:
+        with open(chunk_path, 'w', encoding='utf-8', errors='ignore') as html_file:
             html_file.write(chunk)
 
     print(f'Successfully converted { len(chunks) } parts to => "converted/"')
